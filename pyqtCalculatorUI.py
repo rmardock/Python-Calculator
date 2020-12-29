@@ -224,8 +224,6 @@ class Ui_MainWindow(object):
     def button_squared(self):
     	fnumber = self.lineEdit.text()
     	global fnum
-    	#global math_function
-    	#math_function = ""
     	fnum = float(fnumber)
     	self.lineEdit.clear()
     	self.lineEdit.setText(str(fnum * fnum))
@@ -233,8 +231,6 @@ class Ui_MainWindow(object):
     def button_square_root(self):
     	fnumber = self.lineEdit.text()
     	global fnum
-    	#global math_function
-    	#math_function = ""
     	fnum = float(fnumber)
     	self.lineEdit.clear()
     	self.lineEdit.setText(str(math.sqrt(fnum)))
