@@ -63,7 +63,7 @@ class Ui_MainWindow(object):
         self.pushButton_13.setObjectName("pushButton_13")
 
         self.pushButton_14 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_14.setGeometry(QtCore.QRect(90, 370, 261, 71))
+        self.pushButton_14.setGeometry(QtCore.QRect(180, 370, 171, 71))
         self.pushButton_14.setObjectName("pushButton_14")
 
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
@@ -85,6 +85,10 @@ class Ui_MainWindow(object):
         self.pushButton_18 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_18.setGeometry(QtCore.QRect(0, 370, 81, 71))
         self.pushButton_18.setObjectName("pushButton_18")
+
+        self.pushButton_19 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_19.setGeometry(QtCore.QRect(90, 370, 81, 71))
+        self.pushButton_19.setObjectName("pushButton_19")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -115,33 +119,36 @@ class Ui_MainWindow(object):
         self.pushButton_16.setText(_translate("MainWindow", "-"))
         self.pushButton_17.setText(_translate("MainWindow", "÷"))
         self.pushButton_18.setText(_translate("MainWindow", "CE"))
+        self.pushButton_19.setText(_translate("MainWindow", "."))
 
     #Button connections for gui
     def initUI(self, MainWindow):
     	#Number buttons
-    	self.pushButton_13.clicked.connect(self.button0_click)
-    	self.pushButton_9.clicked.connect(self.button1_click)
-    	self.pushButton_10.clicked.connect(self.button2_click)
-    	self.pushButton_11.clicked.connect(self.button3_click)
-    	self.pushButton_4.clicked.connect(self.button4_click)
-    	self.pushButton_5.clicked.connect(self.button5_click)
-    	self.pushButton_6.clicked.connect(self.button6_click)
-    	self.pushButton.clicked.connect(self.button7_click)
-    	self.pushButton_2.clicked.connect(self.button8_click)
-    	self.pushButton_3.clicked.connect(self.button9_click)
+        self.pushButton_13.clicked.connect(self.button0_click)
+        self.pushButton_9.clicked.connect(self.button1_click)
+        self.pushButton_10.clicked.connect(self.button2_click)
+        self.pushButton_11.clicked.connect(self.button3_click)
+        self.pushButton_4.clicked.connect(self.button4_click)
+        self.pushButton_5.clicked.connect(self.button5_click)
+        self.pushButton_6.clicked.connect(self.button6_click)
+        self.pushButton.clicked.connect(self.button7_click)
+        self.pushButton_2.clicked.connect(self.button8_click)
+        self.pushButton_3.clicked.connect(self.button9_click)
 
     	#Function buttons
-    	self.pushButton_15.clicked.connect(self.button_add_click)
-    	self.pushButton_16.clicked.connect(self.button_subtract_click)
-    	self.pushButton_12.clicked.connect(self.button_multiply_click)
-    	self.pushButton_17.clicked.connect(self.button_divide_click)
-    	self.pushButton_7.clicked.connect(self.button_square_root)
-    	self.pushButton_8.clicked.connect(self.button_squared)
-    	self.pushButton_14.clicked.connect(self.button_equal)
-    	self.pushButton_18.clicked.connect(self.button_clear)
+        self.pushButton_15.clicked.connect(self.button_add_click)
+        self.pushButton_16.clicked.connect(self.button_subtract_click)
+        self.pushButton_12.clicked.connect(self.button_multiply_click)
+        self.pushButton_17.clicked.connect(self.button_divide_click)
+        self.pushButton_7.clicked.connect(self.button_square_root)
+        self.pushButton_8.clicked.connect(self.button_squared)
+        self.pushButton_14.clicked.connect(self.button_equal)
+        self.pushButton_18.clicked.connect(self.button_clear)
+        self.pushButton_19.clicked.connect(self.button_period_click)
 
-    	global math_function
-    	math_function = ""
+        #Global variable initialization
+        global math_function
+        math_function = ""
     	
     #Button functions 
     def button0_click(self):
@@ -185,9 +192,13 @@ class Ui_MainWindow(object):
     	self.lineEdit.setText(text + "8")
 
     def button9_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.text()
-    	self.lineEdit.setText(text + "9")
+        text = self.lineEdit.text()
+        self.lineEdit.text()
+        self.lineEdit.setText(text + "9")
+
+    def button_period_click(self):
+        text = self.lineEdit.text()
+        self.lineEdit.setText(text + ".")
 
     def button_add_click(self):
     	fnumber = self.lineEdit.text()
