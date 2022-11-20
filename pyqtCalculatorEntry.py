@@ -8,6 +8,7 @@ if __name__ == "__main__":
 		app = QtWidgets.QApplication(sys.argv)
 
 MainWindow = QtWidgets.QMainWindow()
+
 app.setStyle('Fusion')
 palette = QtGui.QPalette()
 palette.setColor(QtGui.QPalette.Window, QtGui.QColor(53,53,53))

@@ -1,9 +1,8 @@
-import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
-import math
+from PyQt5 import QtCore, QtWidgets
+from pycalc_functions import *
 
 class Ui_MainWindow(object):
-	#UI Initialization
+	# UI Initialization Function
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(351, 464)
@@ -98,6 +97,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    # Function to set all text values on UI
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Calculator"))
@@ -121,151 +121,135 @@ class Ui_MainWindow(object):
         self.pushButton_18.setText(_translate("MainWindow", "CE"))
         self.pushButton_19.setText(_translate("MainWindow", "."))
 
-    #Button connections for gui
+    # Function to connect on-click button functions to buttons on GUI
+    # MainWindow parameter is required for QtWidgets.QMainWindow() -> removing the parameter will break the program
+
     def initUI(self, MainWindow):
-    	#Number buttons
-        self.pushButton_13.clicked.connect(self.button0_click)
-        self.pushButton_9.clicked.connect(self.button1_click)
-        self.pushButton_10.clicked.connect(self.button2_click)
-        self.pushButton_11.clicked.connect(self.button3_click)
-        self.pushButton_4.clicked.connect(self.button4_click)
-        self.pushButton_5.clicked.connect(self.button5_click)
-        self.pushButton_6.clicked.connect(self.button6_click)
-        self.pushButton.clicked.connect(self.button7_click)
-        self.pushButton_2.clicked.connect(self.button8_click)
-        self.pushButton_3.clicked.connect(self.button9_click)
+        # Instantiate CurrentNumber object
+        # This object will hold the values and complete calculations for the calculator
+        cn = CurrentNumber()
+    	# On-Click Number Buttons
+        self.pushButton_13.clicked.connect(lambda: self.button0_click(cn))
+        self.pushButton_9.clicked.connect(lambda: self.button1_click(cn))
+        self.pushButton_10.clicked.connect(lambda: self.button2_click(cn))
+        self.pushButton_11.clicked.connect(lambda: self.button3_click(cn))
+        self.pushButton_4.clicked.connect(lambda: self.button4_click(cn))
+        self.pushButton_5.clicked.connect(lambda: self.button5_click(cn))
+        self.pushButton_6.clicked.connect(lambda: self.button6_click(cn))
+        self.pushButton.clicked.connect(lambda: self.button7_click(cn))
+        self.pushButton_2.clicked.connect(lambda: self.button8_click(cn))
+        self.pushButton_3.clicked.connect(lambda: self.button9_click(cn))
 
-    	#Function buttons
-        self.pushButton_15.clicked.connect(self.button_add_click)
-        self.pushButton_16.clicked.connect(self.button_subtract_click)
-        self.pushButton_12.clicked.connect(self.button_multiply_click)
-        self.pushButton_17.clicked.connect(self.button_divide_click)
-        self.pushButton_7.clicked.connect(self.button_square_root)
-        self.pushButton_8.clicked.connect(self.button_squared)
-        self.pushButton_14.clicked.connect(self.button_equal)
-        self.pushButton_18.clicked.connect(self.button_clear)
-        self.pushButton_19.clicked.connect(self.button_period_click)
+    	# On-Click Function Buttons
+        self.pushButton_15.clicked.connect(lambda: self.button_add_click(cn))
+        self.pushButton_16.clicked.connect(lambda: self.button_subtract_click(cn))
+        self.pushButton_12.clicked.connect(lambda: self.button_multiply_click(cn))
+        self.pushButton_17.clicked.connect(lambda: self.button_divide_click(cn))
+        self.pushButton_7.clicked.connect(lambda: self.button_square_root(cn))
+        self.pushButton_8.clicked.connect(lambda: self.button_squared(cn))
+        self.pushButton_14.clicked.connect(lambda: self.button_equal(cn))
+        self.pushButton_18.clicked.connect(lambda: self.button_clear(cn))
+        self.pushButton_19.clicked.connect(lambda: self.button_period_click(cn))
 
-        #Global variable initialization
+        # Global variable initialization
         global math_function
-        math_function = ""
-    	
-    #Button functions 
-    def button0_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.setText(text + "0")
+        math_function = ""	
+    
+    # Button functions 
+    def button0_click(self, cn):
+        text = "0"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button1_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.setText(text + "1")
+    def button1_click(self, cn):
+        text = "1"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button2_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.setText(text + "2")
+    def button2_click(self, cn):
+        text = "2"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button3_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.setText(text + "3")
+    def button3_click(self, cn):
+        text = "3"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button4_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.setText(text + "4")
+    def button4_click(self, cn):
+        text = "4"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button5_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.text()
-    	self.lineEdit.setText(text + "5")
+    def button5_click(self, cn):
+        text = "5"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button6_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.text()
-    	self.lineEdit.setText(text + "6")
+    def button6_click(self, cn):
+        text = "6"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button7_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.text()
-    	self.lineEdit.setText(text + "7")
+    def button7_click(self, cn):
+        text = "7"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button8_click(self):
-    	text = self.lineEdit.text()
-    	self.lineEdit.text()
-    	self.lineEdit.setText(text + "8")
+    def button8_click(self, cn):
+        text = "8"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button9_click(self):
-        text = self.lineEdit.text()
-        self.lineEdit.text()
-        self.lineEdit.setText(text + "9")
+    def button9_click(self, cn):
+        text = "9"
+        CurrentNumber.number_entry(cn, text)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button_period_click(self):
-        text = self.lineEdit.text()
-        self.lineEdit.setText(text + ".")
+    def button_period_click(self, cn):
+        CurrentNumber.period_entry(cn)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button_add_click(self):
-    	fnumber = self.lineEdit.text()
-    	global fnum
-    	global math_function
-    	math_function = "addition"
-    	fnum = float(fnumber)
-    	self.lineEdit.clear()
+    def button_add_click(self, cn):
+        CurrentNumber.basic_math(cn, "add")
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
 
-    def button_subtract_click(self):
-    	fnumber = self.lineEdit.text()
-    	global fnum
-    	global math_function
-    	math_function = "subtraction"
-    	fnum = float(fnumber)
-    	self.lineEdit.clear()
+    def button_subtract_click(self, cn):
+        CurrentNumber.basic_math(cn, "subtract")
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
 
-    def button_multiply_click(self):
-    	fnumber = self.lineEdit.text()
-    	global fnum
-    	global math_function
-    	math_function = "multiplication"
-    	fnum = float(fnumber)
-    	self.lineEdit.clear()
+    def button_multiply_click(self, cn):
+        CurrentNumber.basic_math(cn, "multiply")
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
 
-    def button_divide_click(self):
-    	fnumber = self.lineEdit.text()
-    	global fnum
-    	global math_function
-    	math_function = "division"
-    	fnum = float(fnumber)
-    	self.lineEdit.clear()
+    def button_divide_click(self, cn):
+        CurrentNumber.basic_math(cn, "divide")
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
 
-    def button_squared(self):
-    	fnumber = self.lineEdit.text()
-    	global fnum
-    	fnum = float(fnumber)
-    	self.lineEdit.clear()
-    	self.lineEdit.setText(str(fnum * fnum))
+    def button_squared(self, cn):
+        CurrentNumber.square(cn)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button_square_root(self):
-    	fnumber = self.lineEdit.text()
-    	global fnum
-    	fnum = float(fnumber)
-    	self.lineEdit.clear()
-    	self.lineEdit.setText(str(math.sqrt(fnum)))
+    def button_square_root(self, cn):
+        CurrentNumber.square_root(cn)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button_clear(self):
-    	self.lineEdit.clear()
-    	global math_function
-    	math_function = ""
+    def button_clear(self, cn):
+        CurrentNumber.clear_current_number(cn)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
 
-    def button_equal(self):
-    	snum = self.lineEdit.text()
-    	self.lineEdit.clear()
-
-    	if math_function == "":
-    		self.lineEdit.setText(str(snum))
-
-    	if math_function == "addition":
-    		self.lineEdit.setText(str(fnum + float(snum)))
-
-    	if math_function == "subtraction":
-    		self.lineEdit.setText(str(fnum - float(snum)))
-
-    	if math_function == "multiplication":
-    		self.lineEdit.setText(str(fnum * float(snum)))
-
-    	if math_function == "division":
-    		self.lineEdit.setText(str(fnum / float(snum)))
+    def button_equal(self, cn):
+        CurrentNumber.equals(cn)
+        self.lineEdit.setText(str(CurrentNumber.get_current_number(cn)))
+# ><----->< New functions to implement ><----->< #
+    # Decimal to binary 
+    # Binary to decimal 
+    # Re-Build interface entirely to accommodate basic and programmer functions similar to Windows 10 Calculator and any future functionality 
+        # Use QComboBox for swapping between calculator modes 
+    # Implement bin to hex, hex to bin, dec to hex, hex to dec
+    # Add functionality for logarithmic functions
+    # Build functions for sin, cos, tan
