@@ -15,12 +15,3 @@ class connection_tools(object):
         
         if new_handler is not None:
             signal.connect(new_handler)
-
-
-#Prototype for implementing reconnect in code 
-#if connected:
-#   reconnect(myButton.clicked, funtion_a)
-#else:
-#   reconnect(myButton.clicked, function_b)
-
-#Look at COVID Application project for use of comboBox functions and timing 
