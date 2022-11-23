@@ -15,6 +15,12 @@ class CurrentNumber():
         self.fnum = 0
         # Variable for second number in calculation
         self.snum = 0
+        # Variable for holding calculator mode
+        self.mode = ""
+    
+    # Setter function for calculator mode
+    def set_mode(self, mode):
+        self.mode = mode
     
     # Getter Function for current number
     def get_current_number(self):
@@ -22,6 +28,15 @@ class CurrentNumber():
     
     # Function for number entry using the onscreen number keys
     def number_entry(self, number):
+        
+        # If in binary mode
+        if(self.mode == "binary"):
+            # Possibly use strings for binary value storage
+            # If strings are used, move BinaryButtonFunctions to its own file and build new functions for buttons one and two
+            current_number_str = str(self.current_number)
+            print(self.current_number)
+            new_number_str = current_number_str + number
+            self.current_number = int(new_number_str, 2)
         # If last keypress was "." button
         if(self.last_keypress == "."):
             current_number_str = str(self.current_number)
@@ -30,8 +45,8 @@ class CurrentNumber():
         # If last keypress was a number or "." was pressed earlier, keep number as is
         else:
             current_number_str = str(self.current_number)
-        new_number_str = current_number_str + number
-        self.last_keypress = number
+            new_number_str = current_number_str + number
+            self.last_keypress = number
         # If number is type float, reassign to float (if "." has been pressed)
         if(type(self.current_number) is float):
             self.current_number = float(new_number_str)
@@ -75,6 +90,24 @@ class CurrentNumber():
                 self.fnum = self.fnum / self.snum
             self.current_number = self.fnum
 
+    def binary_math(self, math_function): 
+        # Restructure this function into separate, more in depth binary calculation functions
+        self.function = math_function
+        
+        if(self.fnum == 0):
+            self.fnum = self.current_number
+        else:
+            self.snum = self.current_number
+            if(math_function == "add"):
+                self.fnum = bin(self.fnum + self.snum)
+            elif(math_function == "subtract"):
+                self.fnum = bin(self.fnum - self.snum)
+            elif(math_function == "multiply"):
+                self.fnum = bin(self.fnum * self.snum)
+            elif(math_function == "divide"):
+                self.fnum = bin(self.fnum / self.snum)
+            self.current_number = self.fnum
+
     # Function for squaring number
     def square(self):
         self.current_number = self.current_number * self.current_number
@@ -91,16 +124,17 @@ class CurrentNumber():
             pass
         # If function operation button has been pressed (+, -, *, /)
         else:
-            self.snum = self.current_number
-            if(self.function == "add"):
-                self.current_number = self.fnum + self.snum
-            elif(self.function == "subtract"):
-                self.current_number = self.fnum - self.snum
-            elif(self.function == "multiply"):
-                self.current_number = self.fnum * self.snum
-            elif(self.function == "divide"):
-                self.current_number = self.fnum / self.snum
+            self.basic_math(self.function)
             
             # Reset self.fnum and self.snum variables
+            self.fnum = 0
+            self.snum = 0
+            
+    def bin_equals(self):
+        if(self.function == ""):
+            pass
+        else:
+            self.binary_math(self.function)
+            
             self.fnum = 0
             self.snum = 0

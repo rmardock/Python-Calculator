@@ -1,4 +1,4 @@
-## https://stackoverflow.com/questions/21586643/pyqt-widget-connect-and-disconnect
+## reconnect function from https://stackoverflow.com/questions/21586643/pyqt-widget-connect-and-disconnect
 
 # Class for interface connection functions
 class connection_tools(object):

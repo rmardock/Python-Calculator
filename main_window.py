@@ -6,8 +6,6 @@ class MainWindow(object):
     def __init__(self):
         super().__init__()
         MainWindow = QtWidgets.QMainWindow()
-        #self.windows = []
-         
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(453, 542)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -131,11 +129,11 @@ class MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
         # Assign function for when comboBox selection is changed
-        self.mode_switch.currentTextChanged.connect(lambda: self.change_mode(MainWindow, self.mode_switch.currentText()))
+        self.mode_switch.currentTextChanged.connect(lambda: self.change_mode(self.mode_switch.currentText()))
         # Initialize UI button connections
         self.init_ui(MainWindow)
         # Set main window to variable for getter function
-        self.mw = MainWindow
+        self.set_mw(MainWindow)
     # Function to set all text values on UI 
     def retranslate_ui(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -167,39 +165,45 @@ class MainWindow(object):
         # Instantiate CurrentNumber object
         # This object will hold the values and complete calculations for the calculator
         cn = CurrentNumber()
+        # Set calculator mode
+        cn.set_mode("standard")
     	# On-Click Number Buttons
-        self.button_number_0.clicked.connect(lambda: ButtonFunctions.button0_click(self, cn))
-        self.button_number_1.clicked.connect(lambda: ButtonFunctions.button1_click(self, cn))
-        self.button_number_2.clicked.connect(lambda: ButtonFunctions.button2_click(self, cn))
-        self.button_number_3.clicked.connect(lambda: ButtonFunctions.button3_click(self, cn))
-        self.button_number_4.clicked.connect(lambda: ButtonFunctions.button4_click(self, cn))
-        self.button_number_5.clicked.connect(lambda: ButtonFunctions.button5_click(self, cn))
-        self.button_number_6.clicked.connect(lambda: ButtonFunctions.button6_click(self, cn))
-        self.button_number_7.clicked.connect(lambda: ButtonFunctions.button7_click(self, cn))
-        self.button_number_8.clicked.connect(lambda: ButtonFunctions.button8_click(self, cn))
-        self.button_number_9.clicked.connect(lambda: ButtonFunctions.button9_click(self, cn))
+        self.button_number_0.clicked.connect(lambda: StandardButtonFunctions.button0_click(self, cn))
+        self.button_number_1.clicked.connect(lambda: StandardButtonFunctions.button1_click(self, cn))
+        self.button_number_2.clicked.connect(lambda: StandardButtonFunctions.button2_click(self, cn))
+        self.button_number_3.clicked.connect(lambda: StandardButtonFunctions.button3_click(self, cn))
+        self.button_number_4.clicked.connect(lambda: StandardButtonFunctions.button4_click(self, cn))
+        self.button_number_5.clicked.connect(lambda: StandardButtonFunctions.button5_click(self, cn))
+        self.button_number_6.clicked.connect(lambda: StandardButtonFunctions.button6_click(self, cn))
+        self.button_number_7.clicked.connect(lambda: StandardButtonFunctions.button7_click(self, cn))
+        self.button_number_8.clicked.connect(lambda: StandardButtonFunctions.button8_click(self, cn))
+        self.button_number_9.clicked.connect(lambda: StandardButtonFunctions.button9_click(self, cn))
 
     	# On-Click Function Buttons
-        self.button_period.clicked.connect(lambda: ButtonFunctions.button_period_click(self, cn))
-        self.button_add.clicked.connect(lambda: ButtonFunctions.button_add_click(self, cn))
-        self.button_subtract.clicked.connect(lambda: ButtonFunctions.button_subtract_click(self, cn))
-        self.button_multiply.clicked.connect(lambda: ButtonFunctions.button_multiply_click(self, cn))
-        self.button_divide.clicked.connect(lambda: ButtonFunctions.button_divide_click(self, cn))
-        self.button_square.clicked.connect(lambda: ButtonFunctions.button_squared(self, cn))
-        self.button_sqrt.clicked.connect(lambda: ButtonFunctions.button_square_root(self, cn))
-        self.button_ce.clicked.connect(lambda: ButtonFunctions.button_clear(self, cn))
-        self.button_equals.clicked.connect(lambda: ButtonFunctions.button_equal(self, cn))    
+        self.button_period.clicked.connect(lambda: StandardButtonFunctions.button_period_click(self, cn))
+        self.button_add.clicked.connect(lambda: StandardButtonFunctions.button_add_click(self, cn))
+        self.button_subtract.clicked.connect(lambda: StandardButtonFunctions.button_subtract_click(self, cn))
+        self.button_multiply.clicked.connect(lambda: StandardButtonFunctions.button_multiply_click(self, cn))
+        self.button_divide.clicked.connect(lambda: StandardButtonFunctions.button_divide_click(self, cn))
+        self.button_square.clicked.connect(lambda: StandardButtonFunctions.button_squared(self, cn))
+        self.button_sqrt.clicked.connect(lambda: StandardButtonFunctions.button_square_root(self, cn))
+        self.button_ce.clicked.connect(lambda: StandardButtonFunctions.button_clear(self, cn))
+        self.button_equals.clicked.connect(lambda: StandardButtonFunctions.button_equal(self, cn))    
+    
+    # Setter function for MainWindow
+    def set_mw(self, mw):
+        self.mw = mw
     
     # Getter function for MainWindow  
     def get_mw(self):
         return self.mw
     
     # Function to reconnect button signals for different comboBox selections in mode_switch
-    def change_mode(self, mw, text):
+    def change_mode(self, text):
         if(text == "Standard"):
-            # Uncomment these lines after figuring out button reconnection
-            #CalculatorMode.standard_calc_connection_utility(mw)
-            pass
+            CalculatorMode.standard_calc_connection_utility(self)
+            print(text)
         if(text == "Programming"):
-            #CalculatorMode.programming_calc_connection_utility(self.mw)
-            pass
+            CalculatorMode.binary_calc_connection_utility(self)
+            print(text)
+            

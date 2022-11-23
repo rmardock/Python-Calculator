@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtWidgets
 from pycalc_functions import *
 
 # Button functions 
-class ButtonFunctions():
+class StandardButtonFunctions():
     def button0_click(self, cn):
         text = "0"
         CurrentNumber.number_entry(cn, text)
@@ -93,8 +93,47 @@ class ButtonFunctions():
         CurrentNumber.equals(cn)
         self.display.setText(str(CurrentNumber.get_current_number(cn)))
     
+class BinaryButtonFunctions():
+    # Function for binary addition
+    def button_binary_add(self, cn):
+        CurrentNumber.binary_math(cn, "add")
+        self.display.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
+        
+    # Function for binary subtraction
+    def button_binary_subtract(self, cn):
+        CurrentNumber.binary_math(cn, "subtract")
+        self.display.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
+        
+    # Function for binary multiplication
+    def button_binary_multiply(self, cn):
+        CurrentNumber.binary_math(cn, "multiply")
+        self.display.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
+        
+    # Function for binary division
+    def button_binary_divide(self, cn):
+        CurrentNumber.binary_math(cn, "divide")
+        self.display.setText(str(CurrentNumber.get_current_number(cn)))
+        CurrentNumber.clear_current_number(cn)
+    
+    # Function for equals button in binary mode
+    def button_bin_equals(self, cn):
+        CurrentNumber.bin_equals(cn)
+        self.display.setText(str(CurrentNumber.get_current_number(cn)))
+    
     # Function for testing button reconnections
     def test_function(self):
         print("Test Successful!")
         self.display.setText("Test Successful!")
+        
+class SignalUtility():
+    # Function to enable buttons
+    def enable_button(button):
+        button.setEnabled(True)
+    
+    # Function to disable buttons
+    def disable_button(button):
+        button.setEnabled(False)
             
