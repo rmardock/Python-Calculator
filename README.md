@@ -1,5 +1,14 @@
 # Python-Calculator
+
+***
+
 This is a simple GUI calculator I built in Python.
 
-This program was built using PyQt5. I will be adding more functionality to this calculator in the future. 
-Please feel free to message me if you find any bugs or errors in this software.
+This program is built using PyQt5. This application is a work in progress and I will be adding more functionality to it in the future. 
+
+***
+
+> ## This application utilizes the following libraries:
+> - PyQt5
+> - math
+> - re
