@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtWidgets
 from modes import CalculatorMode
-from pycalc_functions import *
-from ui_functions import *
+from calc_core import CurrentNumber
+from standard_ui_functions import StandardButtonFunctions
+#from keypress import KeypressModule
 class MainWindow(object):
     def __init__(self):
         super().__init__()
@@ -132,6 +133,10 @@ class MainWindow(object):
         self.mode_switch.currentTextChanged.connect(lambda: self.change_mode(self.mode_switch.currentText()))
         # Initialize UI button connections
         self.init_ui(MainWindow)
+        
+        # self.kp = QtCore.pyqtSignal(QtCore.QEvent)
+        # self.kp.connect(KeypressModule.standard_keypress_event)
+        
         # Set main window to variable for getter function
         self.set_mw(MainWindow)
     # Function to set all text values on UI 
@@ -202,8 +207,15 @@ class MainWindow(object):
     def change_mode(self, text):
         if(text == "Standard"):
             CalculatorMode.standard_calc_connection_utility(self)
-            print(text)
         if(text == "Programming"):
             CalculatorMode.binary_calc_connection_utility(self)
-            print(text)
             
+    #kp = QtCore.pyqtSignal(QtCore.QEvent)
+            
+    def standard_keypress_event(self, event):
+        if event.key() == QtCore.Qt.Key.Key_0:
+            # Call key 0 function here
+            pass
+        elif event.key() == QtCore.Qt.Key.Key_1:
+            # call key 1 function here
+            pass

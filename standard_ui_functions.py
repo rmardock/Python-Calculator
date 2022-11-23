@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtWidgets
-from pycalc_functions import *
+from calc_core import CurrentNumber
 
 # Button functions 
 class StandardButtonFunctions():
@@ -92,48 +92,18 @@ class StandardButtonFunctions():
     def button_equal(self, cn):
         CurrentNumber.equals(cn)
         self.display.setText(str(CurrentNumber.get_current_number(cn)))
-    
-class BinaryButtonFunctions():
-    # Function for binary addition
-    def button_binary_add(self, cn):
-        CurrentNumber.binary_math(cn, "add")
-        self.display.setText(str(CurrentNumber.get_current_number(cn)))
-        CurrentNumber.clear_current_number(cn)
-        
-    # Function for binary subtraction
-    def button_binary_subtract(self, cn):
-        CurrentNumber.binary_math(cn, "subtract")
-        self.display.setText(str(CurrentNumber.get_current_number(cn)))
-        CurrentNumber.clear_current_number(cn)
-        
-    # Function for binary multiplication
-    def button_binary_multiply(self, cn):
-        CurrentNumber.binary_math(cn, "multiply")
-        self.display.setText(str(CurrentNumber.get_current_number(cn)))
-        CurrentNumber.clear_current_number(cn)
-        
-    # Function for binary division
-    def button_binary_divide(self, cn):
-        CurrentNumber.binary_math(cn, "divide")
-        self.display.setText(str(CurrentNumber.get_current_number(cn)))
-        CurrentNumber.clear_current_number(cn)
-    
-    # Function for equals button in binary mode
-    def button_bin_equals(self, cn):
-        CurrentNumber.bin_equals(cn)
-        self.display.setText(str(CurrentNumber.get_current_number(cn)))
-    
-    # Function for testing button reconnections
-    def test_function(self):
-        print("Test Successful!")
-        self.display.setText("Test Successful!")
-        
-class SignalUtility():
-    # Function to enable buttons
-    def enable_button(button):
-        button.setEnabled(True)
-    
-    # Function to disable buttons
-    def disable_button(button):
-        button.setEnabled(False)
             
+    def standard_button_color(self):
+        self.button_number_2.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_number_3.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_number_4.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_number_5.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_number_6.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_number_7.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_number_8.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_number_9.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_period.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_square.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_sqrt.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_multiply.setStyleSheet("background-color:rgb(53,53,53);color:white")
+        self.button_divide.setStyleSheet("background-color:rgb(53,53,53);color:white")
