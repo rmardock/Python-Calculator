@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtWidgets
 from connection_utility import ConnectionTools, SignalUtility
+from style_module import StyleUtility
 from calc_core import CurrentNumber
 from standard_ui_functions import StandardButtonFunctions
 from bin_ui_functions import BinaryButtonFunctions
@@ -11,7 +11,7 @@ class CalculatorMode():
         # Assign calculator mode
         cn.set_mode("standard")
         # Change color of enabled buttons
-        StandardButtonFunctions.standard_button_color(mw)
+        StyleUtility.standard_button_color(mw)
         # Number button connections
         ConnectionTools.reconnect(mw.button_number_0.clicked, lambda: StandardButtonFunctions.button0_click(mw, cn))
         ConnectionTools.reconnect(mw.button_number_1.clicked, lambda: StandardButtonFunctions.button1_click(mw, cn))
@@ -58,7 +58,7 @@ class CalculatorMode():
         # Set calculator mode
         cn.set_mode("binary")
         # Change color of disabled buttons
-        BinaryButtonFunctions.binary_button_color(mw)
+        StyleUtility.binary_button_color(mw)
         # Disable unnecessary buttons for binary mode
         SignalUtility.disable_button(mw.button_number_2)
         SignalUtility.disable_button(mw.button_number_3)

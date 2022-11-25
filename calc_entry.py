@@ -26,6 +26,7 @@ if __name__ == "__main__":
 	ui = MainWindow()
 	# Get QMainWindow from ui variable ((is Mainwindow object))
 	mw = ui.get_mw()
+	mw.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 	# Show window
 	mw.show()
 	sys.exit(app.exec_())

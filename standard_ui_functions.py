@@ -1,4 +1,3 @@
-from PyQt5 import QtCore, QtWidgets
 from calc_core import CurrentNumber
 
 # Button functions 
@@ -92,16 +91,3 @@ class StandardButtonFunctions():
     def button_equal(self, cn):
         CurrentNumber.equals(cn)
         self.display.setText(str(CurrentNumber.get_current_number(cn)))
-            
-    def standard_button_color(self):
-        self.button_number_2.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_number_3.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_number_4.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_number_5.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_number_6.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_number_7.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_number_8.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_number_9.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_period.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_square.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_sqrt.setStyleSheet("background-color:rgb(53,53,53);color:white")
