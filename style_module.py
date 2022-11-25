@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QFont
 class StyleUtility():
     # Function for assigning colors to buttons on startup and for going back to standard mode
     def standard_button_color(self):
@@ -21,23 +22,50 @@ class StyleUtility():
         self.button_ce.setStyleSheet("QPushButton{background-color:rgb(25,25,25);color:white;border:none;}QPushButton::hover{background-color:#8300FF;}")
         self.button_equals.setStyleSheet("QPushButton{background-color:rgb(25,25,25);color:white;border:none;}QPushButton::hover{background-color:#8300FF;}")
     
+    # Window button, line edit, and title styling
     def window_element_color(self):
-        # Window button and line edit styling
         self.button_close.setStyleSheet("QPushButton{background-color:rgb(53,53,53);color:white;border:none;}QPushButton::hover{background-color:rgb(25,25,25);}")
         self.button_min.setStyleSheet("QPushButton{background-color:rgb(53,53,53);color:white;border:none;}QPushButton::hover{background-color:rgb(25,25,25);}")
         self.display.setStyleSheet("QLineEdit{background-color:rgb(25,25,25);border:none;}")
         self.mode_switch.setStyleSheet("QComboBox{background-color:rgb(25,25,25);border:none;color:white;}")
-        
+        self.title.setStyleSheet("QLabel{color:white;}")
+       
+    # Set font styles for application 
+    def font_style(self):
+        self.button_number_0.setFont(QFont("Monospace", 16))
+        self.button_number_1.setFont(QFont("Monospace", 16))
+        self.button_number_2.setFont(QFont("Monospace", 16))
+        self.button_number_3.setFont(QFont("Monospace", 16))
+        self.button_number_4.setFont(QFont("Monospace", 16))
+        self.button_number_5.setFont(QFont("Monospace", 16))
+        self.button_number_6.setFont(QFont("Monospace", 16))
+        self.button_number_7.setFont(QFont("Monospace", 16))
+        self.button_number_8.setFont(QFont("Monospace", 16))
+        self.button_number_9.setFont(QFont("Monospace", 16))
+        self.button_period.setFont(QFont("Monospace", 16))
+        self.button_add.setFont(QFont("Monospace", 16))
+        self.button_subtract.setFont(QFont("Monospace", 16))
+        self.button_multiply.setFont(QFont("Monospace", 16))
+        self.button_divide.setFont(QFont("Monospace", 16))
+        self.button_square.setFont(QFont("Monospace", 16))
+        self.button_sqrt.setFont(QFont("Monospace", 16))
+        self.button_ce.setFont(QFont("Monospace", 16))
+        self.button_equals.setFont(QFont("Monospace", 16))
+        self.button_close.setFont(QFont("Helvetica", 16))
+        self.button_min.setFont(QFont("Helvetica", 16))
+        self.title.setFont(QFont("Monospace", 18))
+        self.mode_switch.setFont(QFont("Monospace", 12))
+        self.display.setFont(QFont("Monospace", 16))
     # Function to change color of disabled buttons
     def binary_button_color(self):
-            self.button_number_2.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_number_3.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_number_4.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_number_5.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_number_6.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_number_7.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_number_8.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_number_9.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_period.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_square.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
-            self.button_sqrt.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);}")
+            self.button_number_2.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_number_3.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_number_4.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_number_5.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_number_6.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_number_7.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_number_8.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_number_9.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_period.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_square.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
+            self.button_sqrt.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")
