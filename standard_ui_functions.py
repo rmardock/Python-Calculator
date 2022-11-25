@@ -105,5 +105,3 @@ class StandardButtonFunctions():
         self.button_period.setStyleSheet("background-color:rgb(53,53,53);color:white")
         self.button_square.setStyleSheet("background-color:rgb(53,53,53);color:white")
         self.button_sqrt.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_multiply.setStyleSheet("background-color:rgb(53,53,53);color:white")
-        self.button_divide.setStyleSheet("background-color:rgb(53,53,53);color:white")

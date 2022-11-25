@@ -2,8 +2,10 @@ from PyQt5 import QtCore, QtWidgets
 from modes import CalculatorMode
 from calc_core import CurrentNumber
 from standard_ui_functions import StandardButtonFunctions
-#from keypress import KeypressModule
-class MainWindow(object):
+from keypress import KeypressModule
+
+import keyboard
+class MainWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         MainWindow = QtWidgets.QMainWindow()
@@ -111,13 +113,16 @@ class MainWindow(object):
         self.display = QtWidgets.QLineEdit(self.centralwidget)
         self.display.setGeometry(QtCore.QRect(30, 10, 281, 31))
         self.display.setObjectName("display")
+        self.display.setReadOnly(True)
+        self.display.setStyleSheet("background-color:rgb(25,25,25);border:none;")
 
         # Combo box for switching calculator modes
         self.mode_switch = QtWidgets.QComboBox(self.centralwidget)
         self.mode_switch.setGeometry(QtCore.QRect(320, 10, 101, 31))
         self.mode_switch.setObjectName("mode_switch")
         self.mode_switch.addItem("Standard")
-        self.mode_switch.addItem("Programming")
+        self.mode_switch.addItem("Binary")
+        self.mode_switch.setStyleSheet("background-color:rgb(25,25,25);border:none;color:white;")
 
         # Build status bar
         MainWindow.setCentralWidget(self.centralwidget)
@@ -134,11 +139,14 @@ class MainWindow(object):
         # Initialize UI button connections
         self.init_ui(MainWindow)
         
-        # self.kp = QtCore.pyqtSignal(QtCore.QEvent)
-        # self.kp.connect(KeypressModule.standard_keypress_event)
-        
         # Set main window to variable for getter function
         self.set_mw(MainWindow)
+
+    def keyboardEventReceived(self, event):
+        if(event.event_type)== 'down':
+            KeypressModule.keypress_handler(self, event)
+
+
     # Function to set all text values on UI 
     def retranslate_ui(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -163,7 +171,7 @@ class MainWindow(object):
         self.button_ce.setText(_translate("MainWindow", "CE"))
         self.button_equals.setText(_translate("MainWindow", "="))
         self.mode_switch.setItemText(0, _translate("MainWindow", "Standard"))
-        self.mode_switch.setItemText(1, _translate("MainWindow", "Programming"))
+        self.mode_switch.setItemText(1, _translate("MainWindow", "Binary"))
         
     # Function to initialize UI
     def init_ui(self, MainWindow):
@@ -172,6 +180,8 @@ class MainWindow(object):
         cn = CurrentNumber()
         # Set calculator mode
         cn.set_mode("standard")
+        
+        self.mode = cn.get_mode()
     	# On-Click Number Buttons
         self.button_number_0.clicked.connect(lambda: StandardButtonFunctions.button0_click(self, cn))
         self.button_number_1.clicked.connect(lambda: StandardButtonFunctions.button1_click(self, cn))
@@ -194,6 +204,8 @@ class MainWindow(object):
         self.button_sqrt.clicked.connect(lambda: StandardButtonFunctions.button_square_root(self, cn))
         self.button_ce.clicked.connect(lambda: StandardButtonFunctions.button_clear(self, cn))
         self.button_equals.clicked.connect(lambda: StandardButtonFunctions.button_equal(self, cn))    
+
+        self.hook = keyboard.on_press(self.keyboardEventReceived)
     
     # Setter function for MainWindow
     def set_mw(self, mw):
@@ -207,15 +219,9 @@ class MainWindow(object):
     def change_mode(self, text):
         if(text == "Standard"):
             CalculatorMode.standard_calc_connection_utility(self)
-        if(text == "Programming"):
+        if(text == "Binary"):
             CalculatorMode.binary_calc_connection_utility(self)
-            
-    #kp = QtCore.pyqtSignal(QtCore.QEvent)
-            
-    def standard_keypress_event(self, event):
-        if event.key() == QtCore.Qt.Key.Key_0:
-            # Call key 0 function here
-            pass
-        elif event.key() == QtCore.Qt.Key.Key_1:
-            # call key 1 function here
-            pass
+    
+    def test(self):
+        print("Success!")
+        self.display.setText("Success!")

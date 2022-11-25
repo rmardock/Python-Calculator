@@ -39,6 +39,11 @@ class BinaryButtonFunctions():
         self.display.setText(CurrentNumber.get_curr_bin_num(cn))
         CurrentNumber.clear_current_number(cn)
     
+    # Function for clear button in binary mode
+    def button_bin_ce(self, cn):
+        CurrentNumber.clear_current_number(cn)
+        self.display.setText(CurrentNumber.get_curr_bin_num(cn))
+    
     # Function for equals button in binary mode
     def button_bin_equals(self, cn):
         CurrentNumber.bin_equals(cn)
@@ -57,6 +62,3 @@ class BinaryButtonFunctions():
             self.button_period.setStyleSheet("background-color:rgb(25,25,25);color:rgb(188,188,188)")
             self.button_square.setStyleSheet("background-color:rgb(25,25,25);color:rgb(188,188,188)")
             self.button_sqrt.setStyleSheet("background-color:rgb(25,25,25);color:rgb(188,188,188)")
-            self.button_multiply.setStyleSheet("background-color:rgb(25,25,25);color:rgb(188,188,188)")
-            self.button_divide.setStyleSheet("background-color:rgb(25,25,25);color:rgb(188,188,188)")
-            

@@ -47,9 +47,6 @@ class CalculatorMode():
         SignalUtility.enable_button(mw.button_square)
         SignalUtility.enable_button(mw.button_sqrt)
         
-        SignalUtility.enable_button(mw.button_multiply)
-        SignalUtility.enable_button(mw.button_divide)
-        
         # Clear current number
         CurrentNumber.clear_current_number(cn)
         # Set display to current number
@@ -74,16 +71,18 @@ class CalculatorMode():
         SignalUtility.disable_button(mw.button_period)
         SignalUtility.disable_button(mw.button_square)
         SignalUtility.disable_button(mw.button_sqrt)
-        # Disable multiplication and division buttons
-        SignalUtility.disable_button(mw.button_multiply)
-        SignalUtility.disable_button(mw.button_divide)
+
         # Reconnect buttons for binary mode
         ConnectionTools.reconnect(mw.button_number_0.clicked, lambda: BinaryButtonFunctions.button_bin_0(mw, cn), lambda: StandardButtonFunctions.button0_click(mw, cn))
         ConnectionTools.reconnect(mw.button_number_1.clicked, lambda: BinaryButtonFunctions.button_bin_1(mw, cn), lambda: StandardButtonFunctions.button1_click(mw, cn))
         ConnectionTools.reconnect(mw.button_add.clicked, lambda: BinaryButtonFunctions.button_binary_add(mw, cn), lambda: StandardButtonFunctions.button_add_click(mw, cn))
         ConnectionTools.reconnect(mw.button_subtract.clicked, lambda: BinaryButtonFunctions.button_binary_subtract(mw, cn), lambda: StandardButtonFunctions.button_subtract_click(mw, cn))
-        # Multiplication and division have been disabled for the binary calculator mode
-        # These operations are more complex and will take more work to complete
-        #ConnectionTools.reconnect(mw.button_multiply.clicked, lambda: BinaryButtonFunctions.button_binary_multiply(mw, cn), lambda: StandardButtonFunctions.button_multiply_click(mw, cn))
-        #ConnectionTools.reconnect(mw.button_divide.clicked, lambda: BinaryButtonFunctions.button_binary_divide(mw, cn), lambda: StandardButtonFunctions.button_divide_click(mw, cn))
+        ConnectionTools.reconnect(mw.button_multiply.clicked, lambda: BinaryButtonFunctions.button_binary_multiply(mw, cn), lambda: StandardButtonFunctions.button_multiply_click(mw, cn))
+        ConnectionTools.reconnect(mw.button_divide.clicked, lambda: BinaryButtonFunctions.button_binary_divide(mw, cn), lambda: StandardButtonFunctions.button_divide_click(mw, cn))
+        ConnectionTools.reconnect(mw.button_ce.clicked, lambda: BinaryButtonFunctions.button_bin_ce(mw, cn), lambda: StandardButtonFunctions.button_clear(mw, cn))
         ConnectionTools.reconnect(mw.button_equals.clicked, lambda: BinaryButtonFunctions.button_bin_equals(mw, cn), lambda: StandardButtonFunctions.button_equal(mw, cn))
+        
+        # Clear current number
+        CurrentNumber.clear_current_number(cn)
+        # Set display to current number
+        mw.display.setText(CurrentNumber.get_curr_bin_num(cn))

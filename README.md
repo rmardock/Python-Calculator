@@ -12,3 +12,5 @@ This program is built using PyQt5. This application is a work in progress and I 
 > - PyQt5
 > - math
 > - re
+> - keyboard
+> - operator

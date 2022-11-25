@@ -1,5 +1,6 @@
 import math
 import re
+from operator import *
 
 # Class to hold and compute calculator values  
 class CurrentNumber():
@@ -46,8 +47,6 @@ class CurrentNumber():
         
         # If in binary mode
         if(self.mode == "binary"):
-            # Possibly use strings for binary value storage
-            # If strings are used, move BinaryButtonFunctions to its own file and build new functions for buttons one and two
             current_number_str = self.curr_bin_num
             new_number_str = current_number_str + number
             self.curr_bin_num = new_number_str
@@ -124,9 +123,9 @@ class CurrentNumber():
             elif(math_function == "subtract"):
                 self.bin_fnum = str(bin(int(self.bin_fnum, 2) - int(self.bin_snum, 2)))
             elif(math_function == "multiply"):
-                self.bin_fnum = str(bin(int(self.bin_fnum, 2) * int(self.bin_snum, 2)))
+                self.bin_fnum = str(bin(mul(int(self.bin_fnum, 2), int(self.bin_snum, 2))))
             elif(math_function == "divide"):
-                self.bin_fnum = str(bin(int(self.bin_fnum, 2) / int(self.bin_snum, 2)))
+                self.bin_fnum = str(bin(int(self.bin_fnum, 2) // int(self.bin_snum, 2)))
             # Remove '0b' from the beginning of the binary number string
             self.bin_fnum = re.sub(r'.', '', self.bin_fnum, count = 2)
             self.curr_bin_num = self.bin_fnum
@@ -142,23 +141,18 @@ class CurrentNumber():
         
     # Function for equals button in calculator
     def equals(self):
-        # If no function operation buttons have been pressed (+, -, *, /), do nothing
-        if(self.function == ""):
-            pass
-        # If function operation button has been pressed (+, -, *, /)
-        else:
+        # If function operation button has been pressed (+, -, *, /), perform calculation
+        if(self.function != ""):
             self.basic_math(self.function)
-            
             # Reset self.fnum and self.snum variables
             self.fnum = 0
             self.snum = 0
             
     # Function for equals button in binary mode
     def bin_equals(self):
-        if(self.function == ""):
-            pass
-        else:
+        # If function operation button has been pressed (+, -, *, /), perform calculation
+        if(self.function != ""):
             self.binary_math(self.function)
-            
+            # Reset self.bin_fnum and self.bin_snum variables
             self.bin_fnum = ""
             self.bin_snum = ""
