@@ -56,6 +56,7 @@ class StyleUtility():
         self.title.setFont(QFont("Monospace", 18))
         self.mode_switch.setFont(QFont("Monospace", 12))
         self.display.setFont(QFont("Monospace", 16))
+        
     # Function to change color of disabled buttons
     def binary_button_color(self):
             self.button_number_2.setStyleSheet("QPushButton{background-color:black;color:rgb(188,188,188);border:none;}")

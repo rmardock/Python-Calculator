@@ -23,9 +23,9 @@ if __name__ == "__main__":
 	# Set palette
 	app.setPalette(palette)
 	# Instantiate MainWindow Class
-	ui = MainWindow()
+	mw = MainWindow()
 	# Get QMainWindow from ui variable ((is Mainwindow object))
-	mw = ui.get_mw()
+	# mw = ui.get_mw()
 	mw.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 	# Show window
 	mw.show()

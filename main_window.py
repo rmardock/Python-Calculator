@@ -6,13 +6,13 @@ from standard_ui_functions import StandardButtonFunctions
 from style_module import StyleUtility
 from keypress import KeypressModule
 import keyboard
-class MainWindow(QtWidgets.QWidget):
+import sys
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        MainWindow = QtWidgets.QMainWindow()
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.setFixedSize(410, 590)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.setObjectName("MainWindow")
+        self.setFixedSize(410, 590)
+        self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
 
         # Close button
@@ -140,29 +140,46 @@ class MainWindow(QtWidgets.QWidget):
         self.mode_switch.addItem("Binary")
 
         # Set centralwidget
-        MainWindow.setCentralWidget(self.centralwidget)
+        self.setCentralWidget(self.centralwidget)
         
         # Retranslate UI
-        self.retranslate_ui(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslate_ui()
+        QtCore.QMetaObject.connectSlotsByName(self)
         
         # Assign function for when comboBox selection is changed
         self.mode_switch.currentTextChanged.connect(lambda: self.change_mode(self.mode_switch.currentText()))
         # Initialize UI button connections
-        self.init_ui(MainWindow)
-        # Set main window to variable for getter function
-        self.set_mw(MainWindow)
+        self.init_ui()
+        # Enable mouse events
+        QtWidgets.QWidget.setEnabled(self, True)
 
+    # Mouse press event handler
+    def mousePressEvent(self, event):
+        self.is_pressed = True
+        self.start_pos = self.mapToGlobal(event.pos())
+        
+    # Mouse movement event handler
+    def mouseMoveEvent(self, event):
+        if(self.is_pressed):
+            self.end_pos = self.mapToGlobal(event.pos())
+            self.delta = self.mapToGlobal(self.end_pos - self.start_pos)
+            self.setGeometry(self.delta.x(), self.delta.y(), self.width(), self.height())
+            self.start_pos = self.end_pos
+           
+    # Mouse release event handler 
+    def mouseReleaseEvent(self, event):
+        self.is_pressed = False
+        
     # Function for detecting keypresses
     def keyboardEventReceived(self, event):
         # If key is pressed
         if(event.event_type == 'down'):
             KeypressModule.keypress_handler(self, event)
-
+            
     # Function to set all text values on UI 
-    def retranslate_ui(self, MainWindow):
+    def retranslate_ui(self):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Calculator"))
+        self.setWindowTitle(_translate("MainWindow", "Calculator"))
         self.button_close.setText(_translate("MainWindow", "X"))
         self.button_min.setText(_translate("MainWindow", "-"))
         self.title.setText(_translate("MainWindow", "Calculator"))
@@ -189,7 +206,7 @@ class MainWindow(QtWidgets.QWidget):
         self.mode_switch.setItemText(1, _translate("MainWindow", "Binary"))
         
     # Function to initialize UI
-    def init_ui(self, MainWindow):
+    def init_ui(self):
         # Instantiate CurrentNumber object
         # This object will hold the values and complete calculations for the calculator
         cn = CurrentNumber()
@@ -221,8 +238,8 @@ class MainWindow(QtWidgets.QWidget):
         self.button_equals.clicked.connect(lambda: StandardButtonFunctions.button_equal(self, cn))    
 
         # Title Bar Buttons
-        self.button_close.clicked.connect(lambda: self.close_app(MainWindow))
-        self.button_min.clicked.connect(lambda: self.min_app(MainWindow))
+        self.button_close.clicked.connect(lambda: self.close_app(self))
+        self.button_min.clicked.connect(lambda: self.min_app(self))
         
         # Keyboard listener
         self.hook = keyboard.on_press(self.keyboardEventReceived)
@@ -241,12 +258,12 @@ class MainWindow(QtWidgets.QWidget):
         MainWindow.showMinimized()
     
     # Setter function for MainWindow
-    def set_mw(self, mw):
-        self.mw = mw
+    # def set_mw(self, mw):
+    #     self.mw = mw
     
-    # Getter function for MainWindow  
-    def get_mw(self):
-        return self.mw
+    # # Getter function for MainWindow  
+    # def get_mw(self):
+    #     return self.mw
     
     # Function to reconnect button signals for different comboBox selections in mode_switch
     def change_mode(self, text):
