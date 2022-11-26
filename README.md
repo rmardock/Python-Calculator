@@ -8,7 +8,7 @@ This program is built using PyQt5. This application is a work in progress and I 
 
 ***
 
-> ## This application utilizes the following modules
+## This application utilizes the following modules
 > - PyQt5
 > - math
 > - re
